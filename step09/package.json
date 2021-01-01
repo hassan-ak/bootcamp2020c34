@@ -19,6 +19,7 @@
     "@contentful/rich-text-react-renderer": "^14.1.2",
     "@typescript-eslint/eslint-plugin": "^4.11.1",
     "@typescript-eslint/parser": "^4.11.1",
+    "dotenv": "^8.2.0",
     "gatsby": "^2.29.3",
     "gatsby-plugin-typescript": "^2.9.0",
     "gatsby-source-contentful": "^4.3.1",
