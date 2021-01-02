@@ -1,39 +1,32 @@
 import React from 'react';
-import { graphql } from 'gatsby';
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { graphql, Link } from 'gatsby';
 
 export default ({data}) => {
-    console.log(documentToReactComponents(JSON.parse(data.allContentfulBlogPost.edges[0].node.content.raw)));
-    return (
-        <div>
-            <div>
-                <h1>{data.allContentfulBlogPost.edges[0].node.title}</h1>
-                <p>{documentToReactComponents(JSON.parse(data.allContentfulBlogPost.edges[0].node.content.raw))}</p>
-                <small>{data.allContentfulBlogPost.edges[0].node.publicationData}</small>
-            </div>
-            <hr/>
-            <div>
-                <h1>{data.allContentfulBlogPost.edges[1].node.title}</h1>
-                <p>{documentToReactComponents(JSON.parse(data.allContentfulBlogPost.edges[1].node.content.raw))}</p>
-                <small>{data.allContentfulBlogPost.edges[1].node.publicationData}</small>
-            </div>
-        </div>
-    );
+  console.log(data);
+  const posts = data.allContentfulBlogPost.edges.map((post) =>
+    <li><Link to={post.node.slug}>{post.node.title}</Link></li>
+  );
+  return (
+      <ul>
+          {posts}
+      </ul>
+  );
 }
 
 
 export const query = graphql`
-  query {
-    allContentfulBlogPost {
-        edges {
+query {    
+  allContentfulBlogPost {
+      edges {
           node {
-            title
-            content {
-              raw
-            }
-            publicationData
+              title
+              content {
+                  raw
+              }
+              publicationData
+              slug
           }
-        }
       }
   }
+}
 `
